@@ -1,0 +1,37 @@
+[
+  {
+    "input": "Analyze Google\u2019s response to misspelled search queries and original term search links.",
+    "expected_output": "Google displays corrected spelling suggestions like \u201cShowing results for X\u201d or \u201cDid you mean: X,\u201d returns results for the corrected term, and provides a link to search for the original term.",
+    "context": [
+      "When a query is likely misspelled, Google shows a corrected-spelling suggestion such as 'Showing results for X' or 'Did you mean: X', returns results for the corrected term, and still offers a link to search for the original term as typed."
+    ]
+  },
+  {
+    "input": "Considering the hierarchical structure of the SERP, how do relevance algorithms determine the ordering of clickable results and their associated URLs?",
+    "expected_output": "Relevance algorithms order clickable results by relevance, most relevant first, based on the title, URL, and snippet provided for each organic SERP result.",
+    "context": [
+      "Each organic result on the SERP shows a clickable title (a link), a destination URL, and a descriptive snippet. Results are ordered by relevance, most relevant first. Clicking a result title navigates to the destination page."
+    ]
+  },
+  {
+    "input": "How does Google\u2019s real-time autocomplete feature populate the search box with suggestions?",
+    "expected_output": "Google\u2019s real-time autocomplete feature updates suggestions in real time on each keystroke and selects a suggestion to fill the search box.",
+    "context": [
+      "While the user types, Google shows a dropdown of autocomplete suggestions that update in real time on each keystroke. Selecting a suggestion fills the search box with it and executes the search. An empty box shows no query-based suggestions."
+    ]
+  },
+  {
+    "input": "Considering Google Search\u2019s functionality, what navigation occurs when a free-text query is submitted and executed?",
+    "expected_output": "Pressing Enter or clicking the Google Search button navigates to a results page (SERP) of organic results.",
+    "context": [
+      "Google Search accepts free-text input in the search box. Pressing Enter or clicking the Google Search button executes a search and navigates to a results page (SERP) of organic results relevant to the query. An empty or whitespace-only query does not trigger navigation to a SERP."
+    ]
+  },
+  {
+    "input": "How does the 'I'm Feeling Lucky' button navigate users, considering query emptiness?",
+    "expected_output": "The \u2018I\u2019m Feeling Lucky\u2019 button bypasses the results page and navigates users directly to the top-ranked organic result for a non-empty query. It does not perform a lucky navigation with an empty query.",
+    "context": [
+      "The 'I'm Feeling Lucky' button, for a non-empty query, bypasses the results page and navigates the user directly to the top-ranked organic result. With an empty query it does not perform a lucky navigation."
+    ]
+  }
+]
