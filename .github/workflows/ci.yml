@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Byte-compile (syntax check, no LLM needed)
+        run: python -m compileall src tests
+
+      # The DeepEval metrics need an LLM judge. We point CI at OpenAI and read the
+      # key from a repo secret. If the secret is NOT set, the suite SKIPS cleanly
+      # (judge_available() is False), so CI stays green and spends no API credits.
+      # Add an OPENAI_API_KEY secret to run the metrics for real on every push.
+      - name: Run DeepEval test gate (skips without OPENAI_API_KEY secret)
+        env:
+          DEEPEVAL_JUDGE_PROVIDER: openai
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: pytest tests/test_metrics.py -q
