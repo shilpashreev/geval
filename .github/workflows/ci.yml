@@ -33,4 +33,4 @@ jobs:
         env:
           DEEPEVAL_JUDGE_PROVIDER: openai
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: pytest tests/test_metrics.py -q
+        run: python -m pytest tests/test_metrics.py -q
