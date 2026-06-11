@@ -113,6 +113,37 @@ shown for each. That separation is the proof the metric discriminates quality.
 
 ---
 
+## Manual test-case verification metrics (the full matrix)
+
+A single "quality" score isn't enough to *verify* a manually-authored test case — reviewers
+check several independent qualities. `src/verification_metrics.py` encodes the **9 standard
+verification dimensions**, each as its own G-Eval rubric:
+
+| Metric | Verifies that the test case… |
+|--------|------------------------------|
+| **Atomicity** | tests a single focused scenario, not many bundled together |
+| **Traceability** | clearly and directly exercises the stated requirement |
+| **Clarity** | is unambiguous and understandable to an executor |
+| **Completeness** | has pre-conditions, steps, test data, and an expected result |
+| **Reproducibility** | is concrete & deterministic — anyone repeats it identically |
+| **Correctness** | states an expected result that is actually correct per the requirement |
+| **Coverage** | exercises the requirement's behaviour incl. negative/boundary cases |
+| **Verifiability** | has an explicit, observable, objectively checkable expected result |
+| **Independence** | is self-contained — no hidden dependence on other test cases |
+
+Run `python -m src.verify_manual_tests` to score every generated manual test case
+(`src/manual_test_dataset.py`) on every dimension and emit a verification dashboard at
+[reports/manual_test_verification.html](reports/manual_test_verification.html):
+
+![Manual test case verification matrix](reports/manual_test_verification.png)
+
+Even on well-formed test cases the matrix surfaces real weaknesses — e.g. **TC-GS-01**
+fails **Atomicity** (it bundles a negative variant into one case) and **TC-GS-04** fails
+**Coverage** (it omits the empty-query rule the requirement states). That's exactly the
+value: each dimension is a separate, actionable signal rather than one opaque score.
+
+---
+
 ## How accurate is DeepEval — and how to get the most from it
 
 This was the core question behind the project. Short answer: **DeepEval is as good as
